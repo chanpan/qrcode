@@ -1,0 +1,1 @@
+<?phpnamespace frontend\assets;use yii\web\AssetBundle;/** * Main frontend application asset bundle. */class VuejsAsset extends AssetBundle{    public $basePath = '@webroot';    public $baseUrl = '@web';    public $css = [    ];    public $js = [        'js/vue.js',        'js/axios.min.js'    ];    public $depends = [    ];}
