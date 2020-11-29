@@ -4,10 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\Cars */
-
-$this->title = 'ข้อมูลรถ';
-$this->params['breadcrumbs'][] = ['label' => 'ข้อมูลรถ', 'url' => ['index']]; 
+/* @var $model frontend\models\Cars */ 
 ?>
 <div class="cars-view">
 
@@ -31,3 +28,8 @@ $this->params['breadcrumbs'][] = ['label' => 'ข้อมูลรถ', 'url' =
 	]) ?>
     </div>
 </div>
+<style>
+.navbar{
+	display:none;
+} 
+</style>
