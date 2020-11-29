@@ -21,7 +21,7 @@ class CarsController extends Controller
 
     public function beforeAction($action) {
 	if (parent::beforeAction($action)) {
-	    if (in_array($action->id, array('index','view','create', 'update','delete','deletes','qrcode'))) {
+	    if (in_array($action->id, array('index','create', 'update','delete','deletes','qrcode'))) {
 		$admin = isset(Yii::$app->session['admin'])?Yii::$app->session['admin']:'';
                 $person = isset(Yii::$app->session['person'])?Yii::$app->session['person']:'';
                 if($admin == '' && $person == ''){
