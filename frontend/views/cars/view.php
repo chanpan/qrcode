@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = ['label' => 'ข้อมูลรถ', 'url' =
 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 	<h4 class="modal-title" id="itemModalLabel"><?= Html::encode($this->title) ?></h4>
     </div>
-    <div class="modal-body">
+    <div class="modal-body" style='width:300px;'>
         <?= DetailView::widget([
 	    'model' => $model,
 	    'attributes' => [ 
