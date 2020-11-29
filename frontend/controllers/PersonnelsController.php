@@ -65,12 +65,14 @@ class PersonnelsController extends Controller
      */
     public function actionIndex()
     {
+		$userType = \Yii::$app->request->get('userType');
         $searchModel = new PersonnelsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+			'dataProvider' => $dataProvider,
+			'userType'=>$userType
         ]);
     }
 
@@ -103,7 +105,7 @@ class PersonnelsController extends Controller
 	    $model = new Personnels();
             $model->scenario = 'create';
 	    if ($model->load(Yii::$app->request->post())) {
-		Yii::$app->response->format = Response::FORMAT_JSON;
+			// $model->userType = 1;       
                 
 		if ($model->save()) {
 		    return \cpn\chanpan\classes\CNMessage::getSuccess('สร้างสำเร็จ');
@@ -111,8 +113,12 @@ class PersonnelsController extends Controller
 		    return \cpn\chanpan\classes\CNMessage::getError('สร้างไม่สำเร็จ');
 		}
 	    } else {
+			$userType = \Yii::$app->request->get('userType');
+			$model->userType = $userType;
+			//$this->title = ($userType == 1)?'จัดการเจ้าหน้าที่':'จัดการสมาชิก';
 		return $this->renderAjax('create', [
-		    'model' => $model,
+			'model' => $model,
+			'userType'=>$userType 
 		]);
 	    }
 	} else {
@@ -132,16 +138,20 @@ class PersonnelsController extends Controller
 	    $model = $this->findModel($id);
 
 	    if ($model->load(Yii::$app->request->post())) {
-		Yii::$app->response->format = Response::FORMAT_JSON;
+			
 		if ($model->save()) {
 		    return \cpn\chanpan\classes\CNMessage::getSuccess('แก้ไขสำเร็จ');
 		} else {
 		    return \cpn\chanpan\classes\CNMessage::getError('แก้ไขไม่สำเร็จ');
 		}
 	    } else {
+			$userType = \Yii::$app->request->get('userType');
+			//$this->title = ($userType == 1)?'จัดการเจ้าหน้าที่':'จัดการสมาชิก';
 		return $this->renderAjax('update', [
-		    'model' => $model,
+			'model' => $model,
+			'userType'=>$userType
 		]);
+		 
 	    }
 	} else {
 	    throw new NotFoundHttpException('Invalid request. Please do not repeat this request again.');

@@ -1,37 +1,50 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 use appxq\sdii\helpers\SDNoty;
 use appxq\sdii\helpers\SDHtml;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\Admins */
+/* @var $model frontend\models\Personnels */
 /* @var $form yii\bootstrap\ActiveForm */
 ?>
 
-<div class="admins-form">
+<div class="personnels-form">
 
     <?php $form = ActiveForm::begin([
 	'id'=>$model->formName(),
     ]); ?>
 
     <div class="modal-header">
-	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="itemModalLabel"><i class=""></i> ผู้ดูแลระบบ</h4>
+        <h4 class="modal-title" id="itemModalLabel"> สมัครสมาชิก</h4>
     </div>
 
     <div class="modal-body">
-	<?= $form->field($model, 'P_username')->textInput(['maxlength' => true]) ?>
+	<?= $form->field($model, 'v_username')->textInput(['maxlength' => true]) ?>
 
-        <?php if($model->isNewRecord):?>
-	<?= $form->field($model, 'P_pass')->passwordInput() ?>
+	 <?php if($model->isNewRecord):?>
+	    <?= $form->field($model, 'v_pass')->passwordInput() ?>
         <?= $form->field($model, 'confirmPassword')->passwordInput() ?>
+     <?php else: ?>
+        <?= $form->field($model, 'v_pass')->passwordInput() ?>
+     <?php endif; ?>
 
-        <?php else: ?>
-            <?= $form->field($model, 'P_pass')->passwordInput() ?>
-<?php endif; ?>
-	<?= $form->field($model, 'P_name')->textInput(['maxlength' => true]) ?>
+	<?= $form->field($model, 'v_name')->textInput(['maxlength' => true]) ?>
+
+	<?= $form->field($model, 'v_home')->textInput(['maxlength' => true]) ?>
+
+        <div class="row">
+            <div class="col-md-4"><?= $form->field($model, 'v_district')->textInput(['maxlength' => true]) ?> </div>
+            <div class="col-md-4"><?= $form->field($model, 'v_state')->textInput(['maxlength' => true]) ?></div>
+            <div class="col-md-4"><?= $form->field($model, 'v_province')->textInput(['maxlength' => true]) ?></div>
+        </div>
+
+        <?php 
+        $items = [1=>'เจ้าหน้าที่',2=>'สมาชิก',3=>'เจ้าหน้าที่ รปภ.'];
+    ?>
+	<?= $form->field($model, 'v_career')->dropDownList($items) ?>
 
     </div>
     <div class="modal-footer">
@@ -61,14 +74,7 @@ $('form#<?= $model->formName()?>').on('beforeSubmit', function(e) {
     ).done(function(result) {
         if(result.status == 'success') {
             <?= SDNoty::show('result.message', 'result.status')?>
-            if(result.action == 'create') {
-                //$(\$form).trigger('reset');
-                $(document).find('#modal-admins').modal('hide');
-                $.pjax.reload({container:'#admins-grid-pjax'});
-            } else if(result.action == 'update') {
-                $(document).find('#modal-admins').modal('hide');
-                $.pjax.reload({container:'#admins-grid-pjax'});
-            }
+            location.href = '<?= Url::to(['/site/person-login'])?>'
         } else {
             <?= SDNoty::show('result.message', 'result.status')?>
         } 

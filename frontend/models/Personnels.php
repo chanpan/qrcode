@@ -38,6 +38,7 @@ class Personnels extends \yii\db\ActiveRecord
             [['v_pass','confirmPassword'], 'required','on' => 'create'],
             ['confirmPassword', 'compare', 'compareAttribute'=>'v_pass', 'message'=>"รหัสผ่านไม่ตรงกัน" ],
             ['v_pass', 'string', 'min' => 6, 'max' => 72],
+            ['userType','safe'],
             [['v_username', 'v_pass', 'v_name', 'v_home', 'v_district', 'v_state', 'v_province', 'v_career'], 'string', 'max' => 255],
         ];
     }
@@ -49,10 +50,10 @@ class Personnels extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'v_username' => 'ยูสเซอร์เนม',
-            'v_pass' => 'พาสเวิร์ด',
+            'v_username' => 'ชื่อผู้ใช้งาน',
+            'v_pass' => 'รหัสผ่าน',
             'v_name' => 'ชื่อ-สกุล',
-            'v_home' => 'ที่อยู่/บ้าน',
+            'v_home' => 'ที่อยู่',
             'v_district' => 'ตำบล',
             'v_state' => 'อำเภอ',
             'v_province' => 'จังหวัด',

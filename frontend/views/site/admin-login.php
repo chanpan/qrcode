@@ -9,18 +9,18 @@
         <form id="frmAdminLogin"> 
 
             <div>
-                <label for="username">Username</label>
+                <label for="username">ชื่อผู้ใช้งาน</label>
                 <input class="form-control" type="text" name="username" id="username" required autofocus="">
 
             </div>
             <div>
-                <label for="password">Password</label>
+                <label for="password">รหัสผ่าน</label>
                 <input class="form-control" type="password" name="password" id="password" required>
 
             </div>
             <br>
             <div>
-                <button type="submit" class="btn btn-primary">Login</button>
+                <button type="submit" class="btn btn-primary">เข้าสู่ระบบ</button>
             </div>
         </form>
     </div>

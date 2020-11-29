@@ -196,5 +196,8 @@ class AdminsController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-    }
+	}
+	public function actionProfile(){
+		return $this->render('profile');
+	}
 }

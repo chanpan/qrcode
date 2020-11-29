@@ -19,7 +19,10 @@ class Personnels extends PersonnelsModel
     {
         return [
             [['id'], 'integer'],
-            [['v_username', 'v_pass', 'v_name', 'v_home', 'v_district', 'v_state', 'v_province', 'v_career'], 'safe'],
+            [[
+                'v_username', 'v_pass', 'v_name', 'v_home', 
+                'v_district', 'v_state', 'v_province', 'v_career','role'
+            ], 'safe'],
         ];
     }
 
@@ -42,7 +45,9 @@ class Personnels extends PersonnelsModel
     public function search($params)
     {
         $query = PersonnelsModel::find();
-
+        if(isset($params['userType'])){
+            $query->andWhere(['userType'=>$params['userType']]);
+        }
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);

@@ -37,6 +37,8 @@ use appxq\sdii\helpers\SDHtml;
 	<?= $form->field($model, 'T_motorname')->textInput(['maxlength' => true]) ?>
 
 	<?= $form->field($model, 'T_motormunber')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'carType')->dropdownList(['1'=>'รถเก่ง','2'=>'รถกระบะ','3'=>'รถจักรยานยนต์'],['prompt'=>'เลือกประเภทรถ...']) ?>
+    <?= $form->field($model, 'carColor')->textInput(['maxlength' => true]) ?>
 
     </div>
     <div class="modal-footer">

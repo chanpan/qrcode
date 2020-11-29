@@ -4,7 +4,10 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use appxq\sdii\helpers\SDNoty;
 use appxq\sdii\helpers\SDHtml;
-
+$this->title = (isset($userType) && $userType == 1)?'จัดการเจ้าหน้าที่':'จัดการสมาชิก';
+if($userType == 3){
+    $this->title = 'จัดการเจ้าหน้าที่ รปภ.';
+}
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Personnels */
 /* @var $form yii\bootstrap\ActiveForm */
@@ -18,16 +21,19 @@ use appxq\sdii\helpers\SDHtml;
 
     <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="itemModalLabel"><i class="fa fa-table"></i> จัดการเจ้าหน้าที่</h4>
+        <h4 class="modal-title" id="itemModalLabel"> <?= $this->title; ?></h4>
     </div>
 
     <div class="modal-body">
-	<?= $form->field($model, 'v_username')->textInput(['maxlength' => true]) ?>
+	<?= $form->field($model, 'userType')->hiddenInput()->label(false) ?>
+    <?= $form->field($model, 'v_username')->textInput(['maxlength' => true]) ?>
 
 	 <?php if($model->isNewRecord):?>
-	<?= $form->field($model, 'v_pass')->passwordInput() ?>
+	    <?= $form->field($model, 'v_pass')->passwordInput() ?>
         <?= $form->field($model, 'confirmPassword')->passwordInput() ?>
-<?php endif; ?>
+     <?php else: ?>
+        <?= $form->field($model, 'v_pass')->passwordInput() ?>
+     <?php endif; ?>
 
 	<?= $form->field($model, 'v_name')->textInput(['maxlength' => true]) ?>
 
@@ -39,7 +45,10 @@ use appxq\sdii\helpers\SDHtml;
             <div class="col-md-4"><?= $form->field($model, 'v_province')->textInput(['maxlength' => true]) ?></div>
         </div>
 
-	<?= $form->field($model, 'v_career')->textInput(['maxlength' => true]) ?>
+    <?php 
+        $items = [1=>'เจ้าหน้าที่',2=>'สมาชิก',3=>'เจ้าหน้าที่ รปภ.'];
+    ?>
+	<?= $form->field($model, 'v_career')->dropDownList($items) ?>
 
     </div>
     <div class="modal-footer">

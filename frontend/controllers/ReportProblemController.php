@@ -116,12 +116,16 @@ class ReportProblemController extends Controller
 
             if ($model->load(Yii::$app->request->post())) {
                 $model->date = date('Y-m-d H:i:s');
+                $model->update_date = date('Y-m-d H:i:s');  
                 if ($model->save()) {
                     return \cpn\chanpan\classes\CNMessage::getSuccess('แก้ไขสำเร็จ');
                 } else {
                     return \cpn\chanpan\classes\CNMessage::getError('แก้ไขไม่สำเร็จ');
                 }
             } else {
+                if($model->rstatus == ''){
+                    $model->rstatus = 0;
+                }
                 return $this->renderAjax('update', [
                     'model' => $model,
                 ]);

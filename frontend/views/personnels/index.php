@@ -12,19 +12,26 @@ use appxq\sdii\helpers\SDHtml;
 /* @var $searchModel frontend\models\search\Personnels */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'จัดการเจ้าหน้าที่';
+$this->title = ($userType == 1)?'จัดการเจ้าหน้าที่':'จัดการสมาชิก';
+if($userType == 3){
+    $this->title = 'จัดการเจ้าหน้าที่ รปภ.';
+}
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
+<div class="row">
+<div class='pull-right'>
+                 <?= $this->render('@frontend/views/site/profile')?>
+            </div>
+</div>
 <div class="box box-primary">
     <div class="box-header">
-         <i class="fa fa-table"></i> <?=  Html::encode($this->title) ?> 
+         <h3><?=  Html::encode($this->title) ?> </h3>
          <div class="pull-right">
-             <?= Html::button(SDHtml::getBtnAdd(), ['data-url'=>Url::to(['personnels/create']), 'class' => 'btn btn-success btn-sm', 'id'=>'modal-addbtn-personnels']). ' ' .
-		      Html::button(SDHtml::getBtnDelete(), ['data-url'=>Url::to(['personnels/deletes']), 'class' => 'btn btn-danger btn-sm', 'id'=>'modal-delbtn-personnels', 'disabled'=>false]) 
+             <?= Html::button(SDHtml::getBtnAdd().' เพิ่มข้อมูล', ['data-url'=>Url::to(['personnels/create?userType='.$userType]), 'class' => 'btn btn-success btn-sm', 'id'=>'modal-addbtn-personnels'])
              ?>
          </div>
-    </div>
+    </div><br>
 <div class="box-body">    
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -36,14 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	'dataProvider' => $dataProvider,
 	'filterModel' => $searchModel,
         'columns' => [
-	    [
-		'class' => 'yii\grid\CheckboxColumn',
-		'checkboxOptions' => [
-		    'class' => 'selectionPersonnelIds'
-		],
-		'headerOptions' => ['style'=>'text-align: center;'],
-		'contentOptions' => ['style'=>'width:40px;text-align: center;'],
-	    ],
+	    
 	    [
 		'class' => 'yii\grid\SerialColumn',
 		'headerOptions' => ['style'=>'text-align: center;'],
@@ -67,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'buttons'=>[
                     'update'=>function($url, $model){
                         return Html::a('<span class="fa fa-edit"></span> '.Yii::t('app', 'แก้ไข'), 
-                                    yii\helpers\Url::to(['personnels/update?id='.$model->id]), [
+                                    yii\helpers\Url::to(['personnels/update?id='.$model->id.'&userType='.Yii::$app->request->get('userType')]), [
                                     'title' => Yii::t('app', 'Edit'),
                                     'class' => 'btn btn-primary btn-xs',
                                     'data-action'=>'update',

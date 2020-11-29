@@ -12,38 +12,34 @@ use appxq\sdii\helpers\SDHtml;
 /* @var $searchModel frontend\models\search\Admins */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Admins';
+$this->title = 'ผู้ดูแลระบบ';
 $this->params['breadcrumbs'][] = $this->title;
 
-?>
+?> 
+
+<div class="row">
+<div class='pull-right'>
+                 <?= $this->render('@frontend/views/site/profile')?>
+            </div>
+</div>
 <div class="box box-primary">
     <div class="box-header">
-         <i class="fa fa-table"></i> <?=  Html::encode($this->title) ?> 
+        <h3><?=  Html::encode($this->title) ?> </h3>
          <div class="pull-right">
-             <?= Html::button(SDHtml::getBtnAdd(), ['data-url'=>Url::to(['admins/create']), 'class' => 'btn btn-success btn-sm', 'id'=>'modal-addbtn-admins']). ' ' .
-		      Html::button(SDHtml::getBtnDelete(), ['data-url'=>Url::to(['admins/deletes']), 'class' => 'btn btn-danger btn-sm', 'id'=>'modal-delbtn-admins', 'disabled'=>false]) 
+             <?= Html::button(SDHtml::getBtnAdd().' เพิ่มข้อมูล', ['data-url'=>Url::to(['admins/create']), 'class' => 'btn btn-success btn-sm', 'id'=>'modal-addbtn-admins'])
              ?>
          </div>
-    </div>
+    </div><br>
 <div class="box-body">    
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?php  Pjax::begin(['id'=>'admins-grid-pjax']);?>
     <?= GridView::widget([
 	'id' => 'admins-grid',
-/*	'panelBtn' => Html::button(SDHtml::getBtnAdd(), ['data-url'=>Url::to(['admins/create']), 'class' => 'btn btn-success btn-sm', 'id'=>'modal-addbtn-admins']). ' ' .
-		      Html::button(SDHtml::getBtnDelete(), ['data-url'=>Url::to(['admins/deletes']), 'class' => 'btn btn-danger btn-sm', 'id'=>'modal-delbtn-admins', 'disabled'=>true]),*/
 	'dataProvider' => $dataProvider,
 	'filterModel' => $searchModel,
         'columns' => [
-	    [
-		'class' => 'yii\grid\CheckboxColumn',
-		'checkboxOptions' => [
-		    'class' => 'selectionAdminIds'
-		],
-		'headerOptions' => ['style'=>'text-align: center;'],
-		'contentOptions' => ['style'=>'width:40px;text-align: center;'],
-	    ],
+	   
 	    [
 		'class' => 'yii\grid\SerialColumn',
 		'headerOptions' => ['style'=>'text-align: center;'],

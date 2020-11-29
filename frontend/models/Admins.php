@@ -44,8 +44,8 @@ class Admins extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'P_username' => 'ยูสเซอร์เนม',
-            'P_pass' => 'พาสเวิร์ด',
+            'P_username' => 'ชื่อผู้ใช้งาน',
+            'P_pass' => 'รหัสผ่าน',
             'P_name' => 'ชื่อ-สกุล',
             'confirmPassword' => Yii::t('user', 'ยืนยันรหัสผ่าน'),
         ];

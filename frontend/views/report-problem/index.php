@@ -16,6 +16,11 @@ $this->title = 'จัดการการแจ้งปัญหา';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
+<div class="row">
+<div class='pull-right'>
+                 <?= $this->render('@frontend/views/site/profile')?>
+            </div>
+</div>
 <div class="box box-primary">
     <div class="box-header">
          <i class="fa fa-table"></i> <?=  Html::encode($this->title) ?> 
@@ -56,23 +61,45 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                     'attribute' => 'status',
                     'value' => function($model){
-                        $items = ['0'=>'ยังไม่เครีย','1'=>'เครียแล้ว'];
+                        $items = ['0'=>'ยังไม่จัดการปัญหา','1'=>'จัดการปัญหาแล้ว'];
                         if($model->status){
                             return $items[$model->status];
                         }else{
                             return $items[0];
                         }
                     },
-                    'filter'=>['0'=>'ยังไม่เครีย','1'=>'เครียแล้ว']
+                    'filter'=>['0'=>'ยังไม่จัดการปัญหา','1'=>'จัดการปัญหาแล้ว']
             ],
             [
                 'attribute' => 'date',
                 'value' => function($model){
 	                if(isset($model->date)){
-	                    return \appxq\sdii\utils\SDdate::mysql2phpDateTime($model->date);
+	                    return \appxq\sdii\utils\SDdate::mysql2phpDate($model->date);
                     }
                 }
             ],
+
+
+            [
+                'attribute' => 'rstatus',
+                'value' => function($model){
+                    $items = ['0'=>'ยังไม่จัดการปัญหา','1'=>'จัดการปัญหาแล้ว'];
+                    if($model->rstatus){
+                        return $items[$model->rstatus];
+                    }else{
+                        return $items[0]; 
+                    }
+                }
+            ],
+            [
+                'attribute' => 'update_date',
+                'value' => function($model){
+	                if(isset($model->update_date)){
+	                    return \appxq\sdii\utils\SDdate::mysql2phpDateTime($model->update_date);
+                    }
+                }
+            ],
+
 
 	    [
 		'class' => 'appxq\sdii\widgets\ActionColumn',

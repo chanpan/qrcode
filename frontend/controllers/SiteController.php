@@ -15,6 +15,11 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use kartik\mpdf\Pdf;
+use yii\web\Response;
+use appxq\sdii\helpers\SDHtml;
+use frontend\models\Personnels;
+use frontend\models\ReportProblem;
+use yii\data\ActiveDataProvider;
 
 /**
  * Site controller
@@ -42,8 +47,67 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $query = ReportProblem::find()->where('status =0 and rstatus is null')->orderBy(['id'=>SORT_DESC]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        return $this->render('index',[
+            'dataProvider'=>$dataProvider
+        ]);
     }
+
+    public function actionRegister()
+    {
+        //var_dump(Yii::$app->session['person']);exit();
+        $model = new Cars();
+        if($model->load(Yii::$app->request->post())){
+            $model->pid = $_POST['Cars']['pid'];
+            //var_dump($_POST);exit();
+            if ($model->save()) {
+                return \cpn\chanpan\classes\CNMessage::getSuccess('สร้างสำเร็จ');
+            } else {
+                return \cpn\chanpan\classes\CNMessage::getError('สร้างไม่สำเร็จ');
+            }
+        }
+
+
+        $person = \Yii::$app->session['person'];
+        if($person){
+            $model->T_name = $person['v_name'];
+            $model->T_home = $person['v_home'];
+            $model->T_district = $person['v_district'];
+            $model->T_state = $person['v_state'];
+            $model->T_province = $person['v_province'];
+            $model->pid = $person['id'];
+        }
+        return $this->render('register', [
+		    'model' => $model,
+		]);
+    }
+    public function actionRegister2()
+    {
+        
+        $model = new Personnels();
+        $model->scenario = 'create';
+        if ($model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            $model->userType = 2;         
+            if ($model->save()) {
+                return \cpn\chanpan\classes\CNMessage::getSuccess('สร้างสำเร็จ');
+            } else {
+                return \cpn\chanpan\classes\CNMessage::getError('สร้างไม่สำเร็จ');
+            }
+        } else {
+            return $this->render('register2', [
+                'model' => $model,
+            ]);
+        }
+    }
+    public function actionSuccess(){
+        return $this->render('success');
+    }
+
 
     /**
      * Logs in a user.
@@ -115,6 +179,9 @@ class SiteController extends Controller
                if($password === $person->v_pass){
                    unset($person['v_pass']);
                    \Yii::$app->session['person'] = $person;
+                  // \Yii::$app->session['userType'] = $person;
+
+                   
                    return \cpn\chanpan\classes\CNMessage::getSuccess("Login Success");
                }
            }
@@ -142,20 +209,8 @@ class SiteController extends Controller
      */
     public function actionContact()
     {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
-                Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
-            } else {
-                Yii::$app->session->setFlash('error', 'There was an error sending your message.');
-            }
-
-            return $this->refresh();
-        } else {
-            return $this->render('contact', [
-                'model' => $model,
-            ]);
-        }
+        return $this->render('contact', [
+        ]);
     }
 
     /**
@@ -281,6 +336,31 @@ class SiteController extends Controller
 
         // return the pdf output as per the destination setting
         return $pdf->render();
+    }
+
+    public function actionManageProblem($id){
+        $model = ReportProblem::findOne($id);
+        if($model->load(Yii::$app->request->post())){
+            $model->update_date = date('Y-m-d H:i:s');
+
+            if($model->rstatus == '1'){
+                $model->status = 1;
+            }else{
+                $model->status = 0;
+            }
+            
+            if($model->save()){
+                return \cpn\chanpan\classes\CNMessage::getSuccess("บันทึกข้อมูลของคุณสำเร็จ");
+            }else{
+                return \cpn\chanpan\classes\CNMessage::getError("เกิดข้อผิดพลาดกรุณาลองใหม่ภายหลังค่ะ", $model->errors);
+            }
+        }
+        if($model->rstatus == ''){
+            $model->rstatus = 0;
+        }
+        return $this->render('manage-problem', [
+            'model' => $model,
+        ]);
     }
      
 }

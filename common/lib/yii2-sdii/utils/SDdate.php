@@ -84,6 +84,8 @@ class SDdate {
 	}
 	
 	public static function mysql2phpDateTime($sqlDate){
+
+		if(!$sqlDate){return '';}
 		$strArr = explode(' ', $sqlDate);
 		$arr = date_parse($sqlDate);
 		$time = (isset($strArr[1]))?' '.$strArr[1]:'';

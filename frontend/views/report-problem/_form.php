@@ -31,9 +31,18 @@ use appxq\sdii\helpers\SDHtml;
 	<?= $form->field($model, 'tel')->textInput(['maxlength' => true]) ?>
 
     <?php
-        $items = ['0'=>'ยังไม่เครีย','1'=>'เครียแล้ว'];
+        $items = ['0'=>'ยังไม่จัดการปัญหา','1'=>'จัดการปัญหาแล้ว'];
     ?>
     <?= $form->field($model, 'status')->inline()->radioList($items) ?>
+
+
+    <div style='border:1px solid blue;padding:10px'>
+        <h4>สถานะเจ้าหน้าที่ รปภ.</h4>
+         
+        <div><b>สถานะ: <b><?= isset($model->rstatus)?$items[$model->rstatus]:'';?>  
+        วันที่แก้ไข <?= isset($model->update_date)?\appxq\sdii\utils\SDdate::mysql2phpDateTime($model->update_date):''?></div>
+        <div><b>หมายเหตุ</b> <br><?= isset($model->rnote)?$model->rnote:'';?></div>
+    </div>
 
     </div>
     <div class="modal-footer">

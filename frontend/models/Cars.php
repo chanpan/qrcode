@@ -34,7 +34,7 @@ class Cars extends \yii\db\ActiveRecord
     {
         return [
             [['T_name', 'T_home', 'T_district', 'T_state', 'T_province', 'T_motorname', 'T_motormunber'], 'required'],
-            [['T_name', 'T_home', 'T_district', 'T_state', 'T_province', 'T_motorname', 'T_motormunber'], 'string', 'max' => 255],
+            [['T_name', 'T_home', 'T_district', 'T_state', 'T_province', 'T_motorname', 'T_motormunber','carType','carColor'], 'string', 'max' => 255],
             [['T_numberphone'], 'string', 'max' => 15],
         ];
     }
@@ -54,6 +54,8 @@ class Cars extends \yii\db\ActiveRecord
             'T_numberphone' => 'เบอร์โทรศัพท์',
             'T_motorname' => 'ยี่ห้อรถ',
             'T_motormunber' => 'ทะเบียนรถ',
+            'carType'=>'ชนิดรถ เช่น รถเก๋ง รถกระบะ',
+            'carColor'=>'สีรถ'
         ];
     }
 }

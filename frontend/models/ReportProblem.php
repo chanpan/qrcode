@@ -34,6 +34,7 @@ class ReportProblem extends \yii\db\ActiveRecord
             [['status'],'integer'],
             [['title', 'user_name'], 'string', 'max' => 255],
             [['tel'], 'string', 'max' => 15],
+            [['rstatus','rnote','update_date'],'safe'],
         ];
     }
 
@@ -49,7 +50,10 @@ class ReportProblem extends \yii\db\ActiveRecord
             'user_name' => 'ชื่อสกุลผู้แจ้งปัญหา',
             'tel' => 'เบอร์โทรศัพท์',
             'date' => 'วันที่แจ้งปัญหา',
-            'status'=>'สถานะ'
+            'status'=>'สถานะ',
+            'rstatus'=>'สถานะ',
+            'rnote'=>'หมายเหตุ',
+            'update_date'=>'วันที่รปภแก้ไข',
         ];
     }
 }

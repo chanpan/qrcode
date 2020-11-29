@@ -36,7 +36,7 @@ AppAsset::register($this);
 <div class="wrap" id="container">
 
     <header id="header">
-        <img src="<?= yii\helpers\Url::to('@web/images/header.png') ?>">
+        <img src="<?= yii\helpers\Url::to('@web/images/header1.jpg') ?>">
     </header>
     <div>
         <?php if (isset(\Yii::$app->session['admin'])): ?>
@@ -51,12 +51,13 @@ AppAsset::register($this);
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="<?= \yii\helpers\Url::to(['/']) ?>">ระบบจัดการรถด้วยการสแกน QRCODE</a>
                     </div>
                     <ul class="nav navbar-nav">
-                        <li><a href="<?= \yii\helpers\Url::to(['/site/admin-login']) ?>">เข้าสูระบบโดย Admin</a></li>
-                        <li><a href="<?= \yii\helpers\Url::to(['/site/person-login']) ?>">เข้าสูระบบโดย Admin</a></li>
-                        <li><a href="<?= \yii\helpers\Url::to(['/report-problem/problem']) ?>">แจ้งปัญหา</a></li>
+                        <li><a href="<?= \yii\helpers\Url::to(['/site/admin-login']) ?>">เข้าสูระบบ ADMIN</a></li>
+                        <li><a href="<?= \yii\helpers\Url::to(['/site/person-login']) ?>">เข้าสูระบบ เจ้าหน้าที่/สมาชิก</a></li>
+                        <li><a href="<?= \yii\helpers\Url::to(['/site/register2']) ?>">สมัครสมาชิก</a></li>
+                        <!-- <li><a href="<?= \yii\helpers\Url::to(['/report-problem/problem']) ?>">แจ้งปัญหา</a></li> -->
+                        <li><a href="<?= \yii\helpers\Url::to(['/site/contact']) ?>">ติดต่อเรา </a></li>
                     </ul>
                 </div>
             </nav>
@@ -71,6 +72,12 @@ AppAsset::register($this);
         <p class="pull-left">&copy; ระบบการจัดการรถด้วยการสแกน qr code</p>
     </div>
 </footer>
+<style>
+    html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+</style>
 <?php $this->registerCss("
 div.required label.control-label:after {
     content: \" *\";
@@ -86,6 +93,9 @@ div.required label.control-label:after {
 .txt{
     color: #1d6d4d;
     font-weight: bold;
+}
+ิbody{
+    overflow-x:hidden;
 }
 ") ?>
 <?php $this->endBody() ?>

@@ -66,6 +66,9 @@ class ReportProblem extends ReportProblemModel
             ->andFilterWhere(['like', 'tel', $this->tel])
                 ->andFilterWhere(['like', 'date', $this->date]);
 
+
+                $query->orderBy(['id'=>SORT_DESC]);
+
         return $dataProvider;
     }
 }

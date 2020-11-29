@@ -10,7 +10,7 @@ Yii::$app->meta->description = 'ระบบการจัดการรถด
 $admin = isset(Yii::$app->session['admin'])?Yii::$app->session['admin']:'';
 ?>
 <div>
-    <h3>สวัสดิ์ดี: <?php echo $admin != '' ? $admin['P_name'] : 'No name'?> <a href="<?= Url::to(['/site/admin-loout'])?>"><i class="fa fa-sign-out" aria-hidden="true"></i> ออกจากระบบ</a></h3>
+    <h3>  | <?php echo $admin != '' ? $admin['P_name'] : 'No name'?> <a href="<?= Url::to(['/site/admin-loout'])?>"><i class="fa fa-sign-out" aria-hidden="true"></i> ออกจากระบบ</a></h3>
 </div>
 <br>
 <div class="row">

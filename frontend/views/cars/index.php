@@ -16,6 +16,11 @@ $this->title = 'จัดการรถ';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
+<div class="row">
+<div class='pull-right'>
+                 <?= $this->render('@frontend/views/site/profile')?>
+            </div>
+</div>
 <div class="box box-primary">
     <div class="box-header">
          <i class="fa fa-table"></i> <?=  Html::encode($this->title) ?> 
@@ -58,6 +63,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'T_state',
              'T_province',
              'T_numberphone',
+             'carColor',
+             [
+                 'attribute'=>'carType',
+                 'value'=>function($model){
+                     if(isset($model->carType) && $model->carType != ''){
+                         $items= ['1'=>'รถเก่ง','2'=>'รถกระบะ','3'=>'รถจักรยานยนต์'];
+                         return $items[$model->carType];
+                     }
+                 }
+                ],
              
 
 	    [

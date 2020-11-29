@@ -19,7 +19,7 @@ class Cars extends CarsModel
     {
         return [
             [['id'], 'integer'],
-            [['T_name', 'T_home', 'T_district', 'T_state', 'T_province', 'T_numberphone', 'T_motorname', 'T_motormunber'], 'safe'],
+            [['pid','T_name', 'T_home', 'T_district', 'T_state', 'T_province', 'T_numberphone', 'T_motorname', 'T_motormunber'], 'safe'],
         ];
     }
 
