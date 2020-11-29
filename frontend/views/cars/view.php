@@ -32,4 +32,8 @@ use yii\widgets\DetailView;
 .navbar{
 	display:none;
 } 
+#header img {
+    width: 400px; 
+}
+#header{ width: 400px;}
 </style>
