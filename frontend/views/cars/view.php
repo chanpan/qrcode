@@ -12,7 +12,7 @@ use yii\widgets\DetailView;
 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 	<h4 class="modal-title" id="itemModalLabel"><?= Html::encode($this->title) ?></h4>
     </div>
-    <div class="modal-body" style='width:400px;'>
+    <div class="modal-body" style='width:350px;'>
         <?= DetailView::widget([
 	    'model' => $model,
 	    'attributes' => [ 
@@ -33,7 +33,7 @@ use yii\widgets\DetailView;
 	display:none;
 } 
 #header img {
-    width: 400px; 
+    width: 350px; 
 }
-#header{ width: 400px;}
+#header{ width: 350px;}
 </style>
